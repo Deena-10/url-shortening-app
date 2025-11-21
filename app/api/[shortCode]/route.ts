@@ -7,6 +7,10 @@ import { prisma } from "@/lib/prisma";
  * Redirects to the original URL and increments click count
  * Uses 308 (Permanent Redirect) to preserve the request method
  */
+
+
+export const runtime = 'nodejs';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { shortCode: string } }
