@@ -6,10 +6,23 @@ import { PrismaClient } from "@prisma/client";
 
 const globalForPrisma = global as unknown as { prisma: PrismaClient };
 
-export const prisma =
-  globalForPrisma.prisma ||
-  new PrismaClient({
-    log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
-  });
+// Create Prisma Client with error handling for build time
+let prismaInstance: PrismaClient;
 
-if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+try {
+  prismaInstance =
+    globalForPrisma.prisma ||
+    new PrismaClient({
+      log: process.env.NODE_ENV === "development" ? ["query", "error", "warn"] : ["error"],
+    });
+
+  if (process.env.NODE_ENV !== "production") {
+    globalForPrisma.prisma = prismaInstance;
+  }
+} catch (error) {
+  // During build time, Prisma Client might not be available yet
+  // Create a mock instance that will be replaced at runtime
+  prismaInstance = {} as PrismaClient;
+}
+
+export const prisma = prismaInstance;

@@ -10,7 +10,9 @@ import { prisma } from "@/lib/prisma";
 
 // Force dynamic rendering - prevents Next.js from trying to statically analyze this route
 export const dynamic = 'force-dynamic';
+export const dynamicParams = true;
 export const runtime = 'nodejs';
+export const fetchCache = 'force-no-store';
 
 export async function GET(
   request: NextRequest,
