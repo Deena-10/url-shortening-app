@@ -8,7 +8,8 @@ import { prisma } from "@/lib/prisma";
  * Uses 308 (Permanent Redirect) to preserve the request method
  */
 
-
+// Force dynamic rendering - prevents Next.js from trying to statically analyze this route
+export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
 
 export async function GET(

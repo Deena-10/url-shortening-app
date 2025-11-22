@@ -11,6 +11,11 @@ import { generateUniqueShortCode } from "@/lib/utils";
  * Request body: { url: string }
  * Response: { success: true, data: { id, originalUrl, shortUrl, shortCode, clickCount, createdAt } }
  */
+
+// Force dynamic rendering - prevents Next.js from trying to statically analyze this route
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function POST(request: NextRequest) {
   try {
     // Parse request body

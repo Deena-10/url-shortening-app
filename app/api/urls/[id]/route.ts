@@ -7,6 +7,11 @@ import { prisma } from "@/lib/prisma";
  * 
  * Response: { success: true, message: "URL deleted successfully" }
  */
+
+// Force dynamic rendering - prevents Next.js from trying to statically analyze this route
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }

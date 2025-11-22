@@ -8,6 +8,11 @@ import { prisma } from "@/lib/prisma";
  * 
  * Response: { success: true, data: [ { id, originalUrl, shortUrl, shortCode, clickCount, createdAt } ] }
  */
+
+// Force dynamic rendering - prevents Next.js from trying to statically analyze this route
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function GET(request: NextRequest) {
   try {
     // Fetch all URLs from database, sorted by createdAt descending (newest first)

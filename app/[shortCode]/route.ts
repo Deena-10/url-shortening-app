@@ -7,6 +7,11 @@ import { prisma } from "@/lib/prisma";
  * Root-level redirect for better UX (users visit yoursite.com/abc123)
  * Uses 308 (Permanent Redirect) to preserve the request method
  */
+
+// Force dynamic rendering - prevents Next.js from trying to statically analyze this route
+export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { shortCode: string } }
